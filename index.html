@@ -12,9 +12,6 @@
 <link rel="manifest" id="manifest-placeholder">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Bebas+Neue&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* ══════════════════════════════════════════════
-   DESIGN TOKENS
-══════════════════════════════════════════════ */
 :root{
   --bg:#050810;
   --bg2:#080d18;
@@ -63,7 +60,6 @@ body{
   padding-bottom:max(80px,env(safe-area-inset-bottom));
 }
 
-/* Animated bg gradient */
 body::before{
   content:'';
   position:fixed;inset:0;
@@ -88,7 +84,6 @@ body::after{
 
 .app{position:relative;z-index:1;max-width:1040px;margin:0 auto;}
 
-/* ══ HEADER ═════════════════════════════════ */
 .header{
   display:flex;align-items:center;gap:14px;
   padding:12px 18px;
@@ -150,7 +145,6 @@ body::after{
 }
 @keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.7);}}
 
-/* ══ NAV ════════════════════════════════════ */
 .nav-wrap{
   padding:0 18px;
   background:rgba(5,8,16,0.95);
@@ -179,11 +173,9 @@ body::after{
 }
 .nav-tab.active .tab-badge{background:var(--accent3);color:var(--accent);}
 
-/* ══ TAB CONTENT ════════════════════════════ */
 .tab-content{display:none;padding:16px 18px;}
 .tab-content.active{display:block;}
 
-/* ══ STATS GRID ─ HERO ══════════════════════ */
 .hero-stats{
   display:grid;grid-template-columns:repeat(4,1fr);
   gap:10px;margin-bottom:14px;
@@ -222,7 +214,6 @@ body::after{
 .delta-up{color:var(--green);}
 .delta-dn{color:var(--red);}
 
-/* ══ CARDS ══════════════════════════════════ */
 .card{
   background:var(--surface);border:1px solid var(--border);
   border-radius:var(--r-lg);padding:16px;margin-bottom:14px;
@@ -239,7 +230,6 @@ body::after{
 }
 .title-dot{width:6px;height:6px;border-radius:50%;}
 
-/* ══ ALERTS ══════════════════════════════ */
 .alert-card{border-left:3px solid var(--orange);}
 #alerts{color:var(--muted);font-size:13px;}
 #alerts.has-alerts{color:var(--text);}
@@ -257,18 +247,15 @@ body::after{
 .ab-pay{background:var(--red-dim);color:var(--red);}
 .ab-bd{background:var(--pink-dim);color:var(--pink);}
 
-/* ══ BIRTHDAY ════════════════════════════ */
 .birthday-item{
   display:flex;align-items:center;gap:10px;
   padding:8px 0;border-top:1px solid var(--border);font-size:13px;
 }
 .birthday-item:first-child{border-top:none;padding-top:0;}
 
-/* ══ CHART ═══════════════════════════════ */
 .chart-wrap{width:100%;overflow:hidden;}
 .chart-wrap svg{width:100%;display:block;}
 
-/* ══ RETENTION RING ══════════════════════ */
 .retention-block{
   display:flex;align-items:center;gap:16px;padding:4px 0;
 }
@@ -288,7 +275,6 @@ body::after{
 .metric-key{color:var(--text2);}
 .metric-val{font-family:var(--font-mono);font-size:11px;}
 
-/* ══ QUICK ACTIONS ═══════════════════════ */
 .quick-actions{
   display:grid;grid-template-columns:repeat(4,1fr);
   gap:8px;margin-bottom:14px;
@@ -304,7 +290,6 @@ body::after{
 .qa-icon{font-size:20px;display:block;margin-bottom:5px;}
 .qa-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;}
 
-/* ══ FORM ════════════════════════════════ */
 .form-card{
   background:var(--surface);border:1px solid var(--border);
   border-radius:var(--r-lg);margin-bottom:14px;overflow:hidden;
@@ -341,14 +326,12 @@ input:focus,select:focus,textarea:focus{
 input::placeholder{color:var(--muted);}
 select option{background:var(--surface2);}
 
-/* ══ CONTROLS ═══════════════════════════ */
 .controls{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;align-items:center;}
 .search-wrap{flex:1;min-width:150px;position:relative;}
 .search-wrap input{padding-left:34px;}
 .search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:14px;pointer-events:none;}
 .filter-group{display:flex;gap:5px;flex-wrap:wrap;}
 
-/* ══ BUTTONS ═════════════════════════════ */
 .btn{
   padding:9px 14px;border:none;border-radius:8px;cursor:pointer;
   font-family:var(--font-body);font-size:12px;font-weight:500;
@@ -380,7 +363,6 @@ select option{background:var(--surface2);}
   transition:all 0.15s;font-family:var(--font-body);
 }
 
-/* ══ CHIPS ═══════════════════════════════ */
 .chip-row{display:flex;gap:5px;margin-bottom:10px;flex-wrap:wrap;align-items:center;font-size:10px;color:var(--muted);}
 .chip{
   background:none;border:none;color:var(--muted);font-size:10px;
@@ -390,7 +372,6 @@ select option{background:var(--surface2);}
 .chip.active{color:var(--accent);background:var(--accent3);}
 .chip:hover{color:var(--text2);}
 
-/* ══ TABLE ═══════════════════════════════ */
 .table-wrap{
   background:var(--surface);border:1px solid var(--border);
   border-radius:var(--r-lg);overflow:hidden;overflow-x:auto;
@@ -408,7 +389,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
 .empty-row td{text-align:center;padding:40px;color:var(--muted);font-size:13px;}
 .table-footer{text-align:center;font-family:var(--font-mono);font-size:10px;color:var(--muted);padding:10px;border-top:1px solid var(--border);}
 
-/* ══ AVATAR ══════════════════════════════ */
 .avatar{
   border-radius:50%;display:inline-flex;
   align-items:center;justify-content:center;
@@ -418,14 +398,12 @@ tr:hover td{background:rgba(0,229,255,0.015);}
 .av-sm{width:32px;height:32px;font-size:11px;}
 .av-lg{width:54px;height:54px;font-size:20px;border-radius:14px;}
 
-/* ══ MEMBER CELL ══════════════════════════ */
 .member-cell{display:flex;align-items:center;gap:9px;}
 .member-info{min-width:0;}
 .member-name{font-weight:500;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px;}
 .member-phone{color:var(--muted);font-family:var(--font-mono);font-size:10px;margin-top:2px;}
 .call-link{color:var(--accent);text-decoration:none;font-size:10px;}
 
-/* ══ CAT BADGE ═══════════════════════════ */
 .cat{
   display:inline-block;padding:2px 8px;border-radius:20px;
   font-family:var(--font-mono);font-size:9px;font-weight:500;white-space:nowrap;
@@ -436,18 +414,15 @@ tr:hover td{background:rgba(0,229,255,0.015);}
 .cat-Cardio{background:var(--orange-dim);color:var(--orange);}
 .cat-Yoga{background:var(--purple-dim);color:var(--purple);}
 
-/* ══ STATUS BADGE ════════════════════════ */
 .badge{display:inline-block;padding:3px 8px;border-radius:20px;font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.3px;}
 .badge-paid{background:var(--green-dim);color:var(--green);}
 .badge-unpaid{background:var(--red-dim);color:var(--red);}
 
-/* ══ EXPIRY ══════════════════════════════ */
 .exp{font-family:var(--font-mono);font-size:11px;}
 .exp.warn{color:var(--orange);}
 .exp.over{color:var(--red);}
 .days-left{font-family:var(--font-mono);font-size:9px;color:var(--muted);margin-top:2px;}
 
-/* ══ ACTION BUTTONS ══════════════════════ */
 .actions{display:flex;gap:3px;}
 .btn-sm{padding:5px 8px;font-size:9px;border-radius:6px;border:1px solid var(--border);gap:2px;font-family:var(--font-mono);}
 .btn-pay{background:var(--accent3);color:var(--accent);}
@@ -457,7 +432,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
 .btn-view{background:var(--purple-dim);color:var(--purple);}
 .btn-del{background:var(--red-dim);color:var(--red);}
 
-/* ══ MODALS ══════════════════════════════ */
 .modal-overlay{
   position:fixed;inset:0;
   background:rgba(5,8,16,0.85);
@@ -492,7 +466,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
   padding:12px;margin-bottom:14px;font-size:13px;line-height:1.7;
 }
 
-/* ══ DETAIL MODAL ════════════════════════ */
 .detail-head{display:flex;align-items:center;gap:14px;margin-bottom:16px;}
 .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}
 .detail-item{background:var(--surface2);border-radius:var(--r);padding:10px 12px;}
@@ -506,7 +479,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
 .h-info{flex:1;font-size:12px;line-height:1.5;}
 .h-fee{font-family:var(--font-mono);font-size:12px;color:var(--green);}
 
-/* ══ WA MODAL ════════════════════════════ */
 .wa-preview{
   background:var(--surface2);border-radius:var(--r);
   padding:12px;font-size:12px;line-height:1.6;white-space:pre-wrap;
@@ -521,7 +493,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
   margin-bottom:10px;font-family:var(--font-mono);
 }
 
-/* ══ BULK MODAL ══════════════════════════ */
 .bulk-count{font-size:13px;color:var(--text2);margin-bottom:12px;}
 .bulk-item{
   display:flex;align-items:center;gap:10px;
@@ -530,7 +501,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
 .bulk-item:first-child{border-top:none;}
 .bulk-left{display:flex;align-items:center;gap:8px;flex:1;font-size:12px;}
 
-/* ══ INSTALL BANNER ══════════════════════ */
 .install-banner{
   background:linear-gradient(135deg,rgba(0,229,255,0.08),rgba(0,153,187,0.05));
   border:1px solid rgba(0,229,255,0.18);border-radius:var(--r-lg);
@@ -541,7 +511,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
 .install-text{font-size:13px;color:var(--text);}
 .install-text small{color:var(--muted);font-size:10px;display:block;margin-top:2px;font-family:var(--font-mono);}
 
-/* ══ FINANCE TAB ═════════════════════════ */
 .fin-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
 .rev-table{width:100%;border-collapse:collapse;font-size:12px;}
 .rev-table th{background:var(--surface2);padding:8px 10px;text-align:left;font-family:var(--font-mono);font-size:9px;text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);}
@@ -552,7 +521,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
 .bar-fill{background:linear-gradient(90deg,var(--accent),var(--green));height:100%;border-radius:3px;transition:width 0.5s ease;}
 .no-data-row td{text-align:center;color:var(--muted);font-size:11px;font-family:var(--font-mono);}
 
-/* ══ EXPENSES TAB ════════════════════════ */
 .exp-form-grid{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:8px;align-items:end;margin-bottom:14px;}
 .exp-cats{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
 .exp-cat-btn{
@@ -574,7 +542,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
 .exp-amount{font-family:var(--font-display);font-size:18px;color:var(--red);letter-spacing:1px;flex-shrink:0;}
 .exp-del{background:var(--red-dim);color:var(--red);border:1px solid rgba(255,56,96,0.2);border-radius:6px;padding:4px 8px;font-size:10px;cursor:pointer;}
 
-/* ══ ATTENDANCE TAB ══════════════════════ */
 .attend-header{display:flex;gap:8px;align-items:center;margin-bottom:14px;flex-wrap:wrap;}
 .attend-date{font-family:var(--font-mono);font-size:12px;color:var(--muted);flex:1;}
 .attend-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
@@ -599,7 +566,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
 .attend-name{flex:1;font-size:13px;}
 .attend-streak{font-family:var(--font-mono);font-size:10px;color:var(--orange);}
 
-/* ══ TOAST ═══════════════════════════════ */
 .toast{
   position:fixed;bottom:max(100px,env(safe-area-inset-bottom));
   left:50%;transform:translateX(-50%) translateY(20px);
@@ -612,7 +578,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
 }
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
-/* ══ SECTION HEADER ═══════════════════════ */
 .section-header{
   display:flex;align-items:center;gap:8px;
   margin-bottom:14px;padding-bottom:10px;
@@ -624,7 +589,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
 }
 .sh-sub{font-family:var(--font-mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
 
-/* ══ PROFIT/LOSS INDICATOR ════════════════ */
 .pnl-bar{display:flex;align-items:center;gap:10px;margin-top:8px;}
 .pnl-label{font-family:var(--font-mono);font-size:10px;color:var(--muted);width:60px;}
 .pnl-track{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden;}
@@ -632,12 +596,10 @@ tr:hover td{background:rgba(0,229,255,0.015);}
 .pnl-fill-exp{height:100%;background:linear-gradient(90deg,var(--red),#c0392b);border-radius:3px;transition:width 0.5s ease;}
 .pnl-val{font-family:var(--font-mono);font-size:10px;width:70px;text-align:right;}
 
-/* ══ SETTINGS SECTION ═════════════════════ */
 .setting-group{margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border);}
 .setting-group:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
 .sg-title{font-family:var(--font-mono);font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:10px;}
 
-/* Responsive adjustments */
 @media(max-width:600px){
   .hero-stats{grid-template-columns:repeat(2,1fr);}
   .quick-actions{grid-template-columns:repeat(2,1fr);}
@@ -648,7 +610,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
   .hero-stats{grid-template-columns:repeat(2,1fr);}
 }
 
-/* ══ LANDING PAGE ════════════════════════════ */
 #landingPage{
   position:fixed;inset:0;
   background:var(--bg);
@@ -739,7 +700,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
 .lp-stat-num{font-family:var(--font-display);font-size:28px;letter-spacing:1px;color:var(--accent);}
 .lp-stat-label{font-size:10px;color:var(--muted);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:0.5px;}
 
-/* ══ DEMO BANNER ═════════════════════════════ */
 #demoBanner{
   display:none;
   background:linear-gradient(90deg,rgba(255,209,102,0.08),rgba(255,159,67,0.05));
@@ -758,7 +718,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
 }
 #demoBanner button:hover{background:rgba(255,209,102,0.2);}
 
-/* ══ ONBOARDING EMPTY STATE ══════════════════ */
 .empty-state{
   text-align:center;padding:40px 20px;
 }
@@ -769,7 +728,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
 </head>
 <body>
 
-<!-- ══ LANDING PAGE ══════════════════════════ -->
 <div id="landingPage">
   <div class="lp-badge"><div class="lp-badge-dot"></div>Now in Beta · v2.0</div>
   <div class="lp-logo">🏋️</div>
@@ -816,7 +774,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
   </div>
 </div>
 
-<!-- ══ DEMO BANNER ════════════════════════════ -->
 <div id="demoBanner">
   ✨ DEMO MODE — Viewing sample data &nbsp;|&nbsp; Add your real gym to get started
   <button onclick="clearDemoAndStart()">Clear Demo Data</button>
@@ -824,7 +781,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
 
 <div class="app">
 
-<!-- ══ HEADER ════════════════════════════════ -->
 <div class="header">
   <div class="logo-mark">🏋️</div>
   <div class="header-info">
@@ -838,7 +794,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
   </div>
 </div>
 
-<!-- ══ NAV TABS ═══════════════════════════════ -->
 <div class="nav-wrap">
   <button class="nav-tab active" id="tab-btn-dashboard" onclick="showTab('dashboard')">📊 Dashboard</button>
   <button class="nav-tab" id="tab-btn-members" onclick="showTab('members')">👥 Members <span class="tab-badge" id="membersBadge">0</span></button>
@@ -847,13 +802,8 @@ tr:hover td{background:rgba(0,229,255,0.015);}
   <button class="nav-tab" id="tab-btn-expenses" onclick="showTab('expenses')">📉 Expenses</button>
 </div>
 
-
-<!-- ════════════════════════════════════════════
-     DASHBOARD TAB
-═════════════════════════════════════════════ -->
 <div class="tab-content active" id="tab-dashboard">
 
-  <!-- Install Banner -->
   <div class="install-banner hidden" id="installBanner">
     <div class="install-text">
       📲 Install FitDesk Pro
@@ -862,7 +812,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
     <button class="btn btn-util" id="installBtn" style="background:var(--accent);color:#050810;font-weight:700;border:none;font-family:var(--font-mono);font-size:11px;">INSTALL</button>
   </div>
 
-  <!-- Hero Stats -->
   <div class="hero-stats">
     <div class="stat-card sc1">
       <span class="stat-glyph">👥</span>
@@ -886,7 +835,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
     </div>
   </div>
 
-  <!-- Quick Actions -->
   <div class="quick-actions">
     <button class="qa-btn" onclick="showTab('members');setTimeout(openAddForm,120)">
       <span class="qa-icon">➕</span>
@@ -906,9 +854,8 @@ tr:hover td{background:rgba(0,229,255,0.015);}
     </button>
   </div>
 
-  <!-- Two-col layout for alerts + retention -->
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;" id="twoColDash">
-    <!-- Alerts -->
+    
     <div class="card alert-card" style="margin-bottom:0">
       <div class="card-header" style="margin-bottom:10px">
         <div class="card-title"><div class="title-dot" style="background:var(--orange)"></div>Action Needed</div>
@@ -916,7 +863,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
       <div id="alerts">No urgent actions ✓</div>
     </div>
 
-    <!-- Retention Ring -->
     <div class="card" style="margin-bottom:0">
       <div class="card-header" style="margin-bottom:10px">
         <div class="card-title"><div class="title-dot" style="background:var(--green)"></div>Health Overview</div>
@@ -945,7 +891,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
     </div>
   </div>
 
-  <!-- Birthdays -->
   <div class="card" id="birthdayCard" style="display:none;border-left:3px solid var(--pink)">
     <div class="card-header">
       <div class="card-title"><div class="title-dot" style="background:var(--pink)"></div>Upcoming Birthdays</div>
@@ -953,7 +898,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
     <div id="birthdayList"></div>
   </div>
 
-  <!-- Revenue Chart -->
   <div class="card">
     <div class="card-header">
       <div class="card-title"><div class="title-dot" style="background:var(--accent)"></div>Revenue — Last 6 Months</div>
@@ -966,13 +910,8 @@ tr:hover td{background:rgba(0,229,255,0.015);}
 
 </div>
 
-
-<!-- ════════════════════════════════════════════
-     MEMBERS TAB
-═════════════════════════════════════════════ -->
 <div class="tab-content" id="tab-members">
 
-  <!-- Add Form -->
   <div class="form-card">
     <button class="form-toggle" onclick="toggleForm()">
       <span>// ADD_NEW_MEMBER</span>
@@ -1018,7 +957,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
     </div>
   </div>
 
-  <!-- Controls -->
   <div class="controls">
     <div class="search-wrap">
       <span class="search-icon">🔍</span>
@@ -1034,7 +972,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
     <button class="btn btn-util file-btn">📂 Restore<input type="file" accept=".json" onchange="importData(event)"></button>
   </div>
 
-  <!-- Category chips -->
   <div class="chip-row">
     <span>Cat:</span>
     <button class="chip active" id="cat-All"     onclick="setCat('All')">All</button>
@@ -1045,7 +982,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
     <button class="chip"        id="cat-Yoga"    onclick="setCat('Yoga')">Yoga</button>
   </div>
 
-  <!-- Sort chips -->
   <div class="chip-row">
     <span>Sort:</span>
     <button class="chip active" id="sort-name"   onclick="setSort('name')">Name</button>
@@ -1055,7 +991,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
     <button class="chip"        id="sort-fee"    onclick="setSort('fee')">Fee</button>
   </div>
 
-  <!-- Table -->
   <div class="table-wrap">
     <table id="table"></table>
     <div class="table-footer" id="tableFooter"></div>
@@ -1063,10 +998,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
 
 </div>
 
-
-<!-- ════════════════════════════════════════════
-     ATTENDANCE TAB
-═════════════════════════════════════════════ -->
 <div class="tab-content" id="tab-attendance">
 
   <div class="section-header">
@@ -1080,7 +1011,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
     </div>
   </div>
 
-  <!-- Attendance Stats -->
   <div class="attend-stats">
     <div class="stat-card sc2">
       <span class="stat-glyph">✅</span>
@@ -1099,7 +1029,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
     </div>
   </div>
 
-  <!-- Search attendance -->
   <div style="margin-bottom:12px;">
     <div class="search-wrap">
       <span class="search-icon">🔍</span>
@@ -1115,13 +1044,8 @@ tr:hover td{background:rgba(0,229,255,0.015);}
 
 </div>
 
-
-<!-- ════════════════════════════════════════════
-     FINANCE TAB
-═════════════════════════════════════════════ -->
 <div class="tab-content" id="tab-finance">
 
-  <!-- Finance Stats -->
   <div class="fin-stats">
     <div class="stat-card sc2">
       <span class="stat-glyph">💰</span>
@@ -1140,7 +1064,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
     </div>
   </div>
 
-  <!-- Profit/Loss Overview -->
   <div class="card" style="margin-bottom:14px">
     <div class="card-header">
       <div class="card-title"><div class="title-dot" style="background:var(--gold)"></div>P&amp;L This Month</div>
@@ -1158,7 +1081,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
     </div>
   </div>
 
-  <!-- Revenue Chart -->
   <div class="card" style="margin-bottom:14px">
     <div class="card-header">
       <div class="card-title"><div class="title-dot" style="background:var(--accent)"></div>Revenue Trend — Last 6 Months</div>
@@ -1168,7 +1090,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
     </div>
   </div>
 
-  <!-- Monthly Breakdown -->
   <div class="card" style="margin-bottom:14px">
     <div class="card-header">
       <div class="card-title"><div class="title-dot" style="background:var(--accent)"></div>Monthly Breakdown</div>
@@ -1180,7 +1101,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
     </div>
   </div>
 
-  <!-- Plan Distribution -->
   <div class="card" style="margin-bottom:14px">
     <div class="card-header">
       <div class="card-title"><div class="title-dot" style="background:var(--green)"></div>Plan Distribution</div>
@@ -1192,7 +1112,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
     </div>
   </div>
 
-  <!-- Category Breakdown -->
   <div class="card">
     <div class="card-header">
       <div class="card-title"><div class="title-dot" style="background:var(--purple)"></div>Category Breakdown</div>
@@ -1206,10 +1125,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
 
 </div>
 
-
-<!-- ════════════════════════════════════════════
-     EXPENSES TAB
-═════════════════════════════════════════════ -->
 <div class="tab-content" id="tab-expenses">
 
   <div class="section-header">
@@ -1219,7 +1134,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
     </div>
   </div>
 
-  <!-- Expense Stats -->
   <div class="fin-stats" style="margin-bottom:14px">
     <div class="stat-card sc4">
       <span class="stat-glyph">📉</span>
@@ -1238,7 +1152,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
     </div>
   </div>
 
-  <!-- Add Expense Form -->
   <div class="card" style="margin-bottom:14px">
     <div class="card-header">
       <div class="card-title"><div class="title-dot" style="background:var(--red)"></div>Add Expense</div>
@@ -1272,7 +1185,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
     </div>
   </div>
 
-  <!-- Expense List -->
   <div class="card">
     <div class="card-header">
       <div class="card-title"><div class="title-dot" style="background:var(--red)"></div>Expense Log</div>
@@ -1289,14 +1201,8 @@ tr:hover td{background:rgba(0,229,255,0.015);}
 
 </div>
 
-</div><!-- .app -->
+</div>
 
-
-<!-- ════════════════════════════════════════════
-     MODALS
-═════════════════════════════════════════════ -->
-
-<!-- Edit Member -->
 <div class="modal-overlay" id="editModal">
   <div class="modal">
     <div class="modal-drag"></div>
@@ -1333,7 +1239,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
   </div>
 </div>
 
-<!-- Renew -->
 <div class="modal-overlay" id="renewModal">
   <div class="modal">
     <div class="modal-drag"></div>
@@ -1354,7 +1259,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
   </div>
 </div>
 
-<!-- WhatsApp -->
 <div class="modal-overlay" id="waModal">
   <div class="modal">
     <div class="modal-drag"></div>
@@ -1368,7 +1272,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
   </div>
 </div>
 
-<!-- Bulk Reminders -->
 <div class="modal-overlay" id="bulkModal">
   <div class="modal">
     <div class="modal-drag"></div>
@@ -1379,7 +1282,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
   </div>
 </div>
 
-<!-- Detail -->
 <div class="modal-overlay" id="detailModal">
   <div class="modal">
     <div class="modal-drag"></div>
@@ -1403,7 +1305,6 @@ tr:hover td{background:rgba(0,229,255,0.015);}
   </div>
 </div>
 
-<!-- Settings -->
 <div class="modal-overlay" id="settingsModal">
   <div class="modal">
     <div class="modal-drag"></div>
@@ -1440,14 +1341,9 @@ tr:hover td{background:rgba(0,229,255,0.015);}
   </div>
 </div>
 
-<!-- Toast -->
 <div class="toast" id="toast"></div>
 
-
 <script>
-// ══════════════════════════════════════════════
-//  PWA
-// ══════════════════════════════════════════════
 const manifestData={
   name:'FitDesk Pro',short_name:'FitDesk',
   description:'Complete gym management suite',
@@ -1471,20 +1367,14 @@ window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPro
 document.getElementById('installBtn').addEventListener('click',()=>{if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then(()=>{deferredPrompt=null;document.getElementById('installBanner').classList.add('hidden');});}});
 window.addEventListener('appinstalled',()=>{document.getElementById('installBanner').classList.add('hidden');toast('✓ App installed!');});
 
-// ══════════════════════════════════════════════
-//  STATE
-// ══════════════════════════════════════════════
 let members=[];
 let expenses=[];
-let attendance={}; // {YYYY-MM-DD: {memberId: bool}}
+let attendance={};
 let settings={gymName:'FITDESK PRO',ownerName:'',countryCode:'91'};
 let currentFilter='all',currentCat='All',currentSort='name';
 let editIdx=-1,renewIdx=-1,detailIdx=-1,formOpen=false,activeTab='dashboard';
 let selectedExpCat='Rent';
 
-// ══════════════════════════════════════════════
-//  INIT
-// ══════════════════════════════════════════════
 function init(){
   try{let s=localStorage.getItem('gymSettings');if(s) settings={...settings,...JSON.parse(s)};}catch(e){}
   document.getElementById('gymNameDisplay').textContent=settings.gymName||'FITDESK PRO';
@@ -1493,7 +1383,6 @@ function init(){
     let v4=localStorage.getItem('fdMembers_v4');
     if(v4){ members=JSON.parse(v4); }
     else {
-      // migrate from old storage keys
       let old=localStorage.getItem('gymMembers_v3')||localStorage.getItem('gymMembers_v2');
       if(old){
         let parsed=JSON.parse(old);
@@ -1509,7 +1398,6 @@ function init(){
   try{let ex=localStorage.getItem('fdExpenses');if(ex) expenses=JSON.parse(ex);}catch(e){expenses=[];}
   try{let at=localStorage.getItem('fdAttendance');if(at) attendance=JSON.parse(at);}catch(e){attendance={};}
 
-  // Header date
   const d=new Date();
   const D=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   const M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -1530,26 +1418,17 @@ function saveExpenses(){localStorage.setItem('fdExpenses',JSON.stringify(expense
 function saveAttendance(){localStorage.setItem('fdAttendance',JSON.stringify(attendance));}
 function uid(){return Math.random().toString(36).substr(2,9);}
 
-// ══════════════════════════════════════════════
-//  AVATAR
-// ══════════════════════════════════════════════
 const AV_COLORS=['#00e5ff','#06ffa5','#ff9f43','#a78bfa','#f472b6','#60a5fa','#fcd34d','#34d399','#f87171','#a3e635'];
 function avColor(n){let h=0;for(let c of n)h=h*31+c.charCodeAt(0);return AV_COLORS[Math.abs(h)%AV_COLORS.length];}
 function avInitials(n){let p=n.trim().split(' ');return p.length>=2?(p[0][0]+p[1][0]).toUpperCase():n.substr(0,2).toUpperCase();}
 function avHTML(n,cls='av-sm'){let e=document.createElement('div');e.className=`avatar ${cls}`;e.style.background=avColor(n);e.textContent=avInitials(n);return e.outerHTML;}
 
-// ══════════════════════════════════════════════
-//  TOAST
-// ══════════════════════════════════════════════
 function toast(msg,color='var(--green)'){
   let t=document.getElementById('toast');
   t.textContent=msg;t.style.borderLeftColor=color;
   t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800);
 }
 
-// ══════════════════════════════════════════════
-//  TABS
-// ══════════════════════════════════════════════
 function showTab(tab){
   activeTab=tab;
   document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
@@ -1561,9 +1440,6 @@ function showTab(tab){
   if(tab==='attendance') renderAttendance();
 }
 
-// ══════════════════════════════════════════════
-//  FORM
-// ══════════════════════════════════════════════
 function toggleForm(){
   formOpen=!formOpen;
   document.getElementById('formBody').classList.toggle('open',formOpen);
@@ -1573,9 +1449,6 @@ function toggleForm(){
 }
 function openAddForm(){if(!formOpen) toggleForm();}
 
-// ══════════════════════════════════════════════
-//  FILTER / SORT
-// ══════════════════════════════════════════════
 function setFilter(f){
   currentFilter=f;
   document.querySelectorAll('.btn-filter').forEach(b=>b.classList.remove('active'));
@@ -1595,9 +1468,6 @@ function setSort(s){
   render();
 }
 
-// ══════════════════════════════════════════════
-//  ADD MEMBER
-// ══════════════════════════════════════════════
 function addMember(){
   let name=document.getElementById('name').value.trim();
   let phone=document.getElementById('phone').value.trim();
@@ -1633,17 +1503,11 @@ function addMember(){
   if(formOpen) toggleForm();
 }
 
-// ══════════════════════════════════════════════
-//  TOGGLE PAID
-// ══════════════════════════════════════════════
 function togglePaid(i){
   members[i].paid=!members[i].paid;save();render();
   toast(members[i].paid?'✓ Marked Paid':'Marked Unpaid',members[i].paid?'var(--green)':'var(--red)');
 }
 
-// ══════════════════════════════════════════════
-//  DELETE
-// ══════════════════════════════════════════════
 function delMember(i){
   if(i<0||i>=members.length) return;
   if(!confirm('Delete '+members[i].name+'?\nThis cannot be undone.')) return;
@@ -1652,9 +1516,6 @@ function delMember(i){
   toast(name+' removed','var(--red)');
 }
 
-// ══════════════════════════════════════════════
-//  RENEW
-// ══════════════════════════════════════════════
 function openRenew(i){
   renewIdx=i;
   let m=members[i],exp=new Date(m.expiry),today=new Date(),isExp=exp<today;
@@ -1684,9 +1545,6 @@ function confirmRenew(){
   toast('✓ Renewed until '+expiry.toLocaleDateString('en-GB'));
 }
 
-// ══════════════════════════════════════════════
-//  EDIT
-// ══════════════════════════════════════════════
 function openEdit(i){
   editIdx=i;let m=members[i];
   document.getElementById('e-name').value=m.name;
@@ -1716,9 +1574,6 @@ function saveEdit(){
   save();render();closeEdit();toast('✓ Member updated');
 }
 
-// ══════════════════════════════════════════════
-//  DETAIL MODAL
-// ══════════════════════════════════════════════
 function openDetail(i){
   detailIdx=i;let m=members[i];
   let av=document.getElementById('dtl-avatar');
@@ -1764,9 +1619,6 @@ function closeDetail(){document.getElementById('detailModal').classList.remove('
 function editFromDetail(){let i=detailIdx;closeDetail();setTimeout(()=>openEdit(i),200);}
 function openWAfromDetail(){let i=detailIdx;closeDetail();setTimeout(()=>openWA(i),200);}
 
-// ══════════════════════════════════════════════
-//  WHATSAPP
-// ══════════════════════════════════════════════
 function smartMsg(m){
   let today=new Date(),exp=new Date(m.expiry);
   let diff=Math.ceil((exp-today)/864e5);
@@ -1823,9 +1675,6 @@ function bulkRemind(){
 }
 function closeBulk(){document.getElementById('bulkModal').classList.remove('open');}
 
-// ══════════════════════════════════════════════
-//  BIRTHDAYS
-// ══════════════════════════════════════════════
 function upcomingBirthdays(days){
   let today=new Date(),res=[];
   members.forEach((m,i)=>{
@@ -1839,9 +1688,6 @@ function upcomingBirthdays(days){
   return res.sort((a,b)=>a.diff-b.diff);
 }
 
-// ══════════════════════════════════════════════
-//  ATTENDANCE
-// ══════════════════════════════════════════════
 function calcStreak(memberId){
   let today=new Date();
   let streak=0;
@@ -1871,7 +1717,6 @@ function renderAttendance(){
   document.getElementById('a-absent').textContent=totalCount-presentCount;
   document.getElementById('a-rate').textContent=totalCount?Math.round(presentCount/totalCount*100)+'%':'0%';
 
-  // update live count in header
   if(dateStr===new Date().toISOString().split('T')[0]){
     document.getElementById('liveCount').textContent=presentCount+' checked in';
   }
@@ -1906,9 +1751,6 @@ function markAllPresent(){
   saveAttendance();renderAttendance();toast('✅ All marked present!');
 }
 
-// ══════════════════════════════════════════════
-//  EXPENSES
-// ══════════════════════════════════════════════
 function selectExpCat(btn){
   document.querySelectorAll('.exp-cat-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
@@ -1980,9 +1822,6 @@ function renderExpenses(){
   document.getElementById('expenseList').innerHTML=html||`<div class="empty-state" style="padding:30px 20px"><span class="empty-state-icon">📉</span><div class="empty-state-title">No Expenses Yet</div><div class="empty-state-sub">${filter?'No expenses for this month.':'Start logging your gym operating costs above.'}</div></div>`;
 }
 
-// ══════════════════════════════════════════════
-//  CHART
-// ══════════════════════════════════════════════
 function drawChart(svgId){
   let svg=document.getElementById(svgId);
   if(!svg) return;
@@ -2016,7 +1855,6 @@ function drawChart(svgId){
     </linearGradient>
   </defs>`;
 
-  // grid lines
   [0,0.25,0.5,0.75,1].forEach(frac=>{
     let y=padT+(H-padT-padB)*(1-frac);
     let val=Math.round(maxV*frac);
@@ -2024,7 +1862,6 @@ function drawChart(svgId){
     if(val>0) out+=`<text x="${padL-4}" y="${y+4}" fill="var(--muted)" font-size="9" text-anchor="end" font-family="'JetBrains Mono',monospace">${val>=1000?Math.round(val/1000)+'k':val}</text>`;
   });
 
-  // bars
   data.forEach((v,i)=>{
     let bH=((H-padT-padB)*v/maxV)||2;
     let x=padL+i*bW+bW*0.15;
@@ -2039,9 +1876,6 @@ function drawChart(svgId){
   svg.innerHTML=out;
 }
 
-// ══════════════════════════════════════════════
-//  FINANCE
-// ══════════════════════════════════════════════
 function renderFinance(){
   let now=new Date();
   let monthKey=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
@@ -2073,7 +1907,6 @@ function renderFinance(){
   document.getElementById('f-avg').textContent='₹'+avg.toLocaleString('en-IN');
   document.getElementById('m-monthrev').textContent='₹'+monthRev.toLocaleString('en-IN');
 
-  // P&L
   let thisMonthExp=expenses.filter(e=>e.date.startsWith(monthKey)).reduce((s,e)=>s+e.amount,0);
   let profit=monthRev-thisMonthExp;
   let maxBar=Math.max(monthRev,thisMonthExp,1);
@@ -2085,7 +1918,6 @@ function renderFinance(){
   pnlEl.textContent=(profit>=0?'↑ +':'↓ ')+'₹'+Math.abs(profit).toLocaleString('en-IN');
   pnlEl.style.color=profit>=0?'var(--green)':'var(--red)';
 
-  // month table
   let sortedMonths=Object.keys(monthMap).sort().reverse().slice(0,12);
   let maxRev=Math.max(...Object.values(monthMap).map(m=>m.revenue),1);
   let mHtml=`<tr><th>Month</th><th>Members</th><th>Revenue</th><th style="width:90px"> </th></tr>`;
@@ -2100,7 +1932,6 @@ function renderFinance(){
   if(!sortedMonths.length) mHtml+=`<tr class="no-data-row"><td colspan="4">No revenue data yet</td></tr>`;
   document.getElementById('monthTable').innerHTML=mHtml;
 
-  // plan table
   let planHtml=`<tr><th>Plan</th><th>Members</th><th>Revenue</th></tr>`;
   ['1 Month','2 Months','3 Months','6 Months','1 Year'].forEach(p=>{
     if(planMap[p]) planHtml+=`<tr><td>${p}</td><td style="color:var(--muted);font-family:var(--font-mono)">${planMap[p].count}</td><td class="rev-amount">₹${planMap[p].rev.toLocaleString('en-IN')}</td></tr>`;
@@ -2108,7 +1939,6 @@ function renderFinance(){
   if(!Object.keys(planMap).length) planHtml+=`<tr class="no-data-row"><td colspan="3">No data yet</td></tr>`;
   document.getElementById('planTable').innerHTML=planHtml;
 
-  // cat table
   let catHtml=`<tr><th>Category</th><th>Members</th><th>%</th></tr>`;
   let catOrder=['General','Weight','Muscle','Cardio','Yoga'];
   let catNames={General:'General',Weight:'Weight Loss',Muscle:'Muscle Building',Cardio:'Cardio',Yoga:'Yoga'};
@@ -2124,9 +1954,6 @@ function renderFinance(){
   drawChart('revChartFin');
 }
 
-// ══════════════════════════════════════════════
-//  MAIN RENDER
-// ══════════════════════════════════════════════
 function render(){
   let search=document.getElementById('search').value.toLowerCase();
   let today=new Date();
@@ -2157,25 +1984,21 @@ function render(){
   document.getElementById('d-unpaid').textContent=unpaidCount;
   document.getElementById('membersBadge').textContent=members.length;
 
-  // Retention ring
   let paidPct=members.length?Math.round(paidCount/members.length*100):0;
   document.getElementById('retentionPct').textContent=paidPct+'%';
   let circ=188.5;
   document.getElementById('retentionArc').style.strokeDashoffset=circ*(1-paidPct/100);
 
-  // renewal rate
   let withRenewals=members.filter(m=>(m.history||[]).some(h=>h.action==='renew')).length;
   document.getElementById('m-renewal').textContent=members.length?Math.round(withRenewals/members.length*100)+'%':'—';
   let avgFee=members.length?Math.round(members.reduce((s,m)=>s+(m.fee||0),0)/members.length):0;
   document.getElementById('m-avgfee').textContent=avgFee?'₹'+avgFee.toLocaleString('en-IN'):'—';
 
-  // liveCount
   let todayKey=new Date().toISOString().split('T')[0];
   let checkins=attendance[todayKey]?Object.values(attendance[todayKey]).filter(Boolean).length:0;
   document.getElementById('liveCount').textContent=checkins+' checked in';
   document.getElementById('m-checkins').textContent=checkins+'/'+activeCount;
 
-  // alerts
   let alertEl=document.getElementById('alerts');
   if(alerts.length){
     alertEl.className='has-alerts';
@@ -2188,7 +2011,6 @@ function render(){
     alertEl.className='';alertEl.innerHTML='<span style="color:var(--green);font-family:var(--font-mono);font-size:12px">✓ All clear — no urgent actions</span>';
   }
 
-  // Birthdays
   let bdCard=document.getElementById('birthdayCard');
   let bdList=document.getElementById('birthdayList');
   if(bdAlerts.length){
@@ -2205,12 +2027,10 @@ function render(){
     }).join('');
   }else{bdCard.style.display='none';}
 
-  // Total revenue label
   let totalRev=members.reduce((s,m)=>(m.history||[]).reduce((ss,h)=>ss+(h.fee||0),s),0);
   document.getElementById('totalRevLabel').textContent='₹'+totalRev.toLocaleString('en-IN');
   drawChart('revenueChart');
 
-  // ── FILTER ──
   let filtered=members.map((m,i)=>({...m,_i:i})).filter(m=>{
     let q=search;
     if(q&&!m.name.toLowerCase().includes(q)&&!m.phone.includes(q)&&!(m.email||'').toLowerCase().includes(q)) return false;
@@ -2222,7 +2042,6 @@ function render(){
     return true;
   });
 
-  // ── SORT ──
   filtered.sort((a,b)=>{
     if(currentSort==='name') return a.name.localeCompare(b.name);
     if(currentSort==='expiry') return new Date(a.expiry)-new Date(b.expiry);
@@ -2232,7 +2051,6 @@ function render(){
     return 0;
   });
 
-  // ── TABLE ──
   let table=document.getElementById('table');
   table.innerHTML=`<tr>
     <th>Member</th><th>Category</th><th style="text-align:center">Status</th>
@@ -2277,9 +2095,6 @@ function render(){
   document.getElementById('tableFooter').textContent=filtered.length+' of '+members.length+' members';
 }
 
-// ══════════════════════════════════════════════
-//  SETTINGS
-// ══════════════════════════════════════════════
 function openSettings(){
   document.getElementById('s-gymName').value=settings.gymName||'';
   document.getElementById('s-ownerName').value=settings.ownerName||'';
@@ -2302,9 +2117,6 @@ function clearAllData(){
   render();closeSettings();toast('All data cleared','var(--red)');
 }
 
-// ══════════════════════════════════════════════
-//  EXPORT / IMPORT
-// ══════════════════════════════════════════════
 function exportData(){
   let blob=new Blob([JSON.stringify({members,expenses,attendance},null,2)],{type:'application/json'});
   let a=document.createElement('a');a.href=URL.createObjectURL(blob);
@@ -2317,7 +2129,6 @@ function importData(e){
   r.onload=ev=>{
     try{
       let imp=JSON.parse(ev.target.result);
-      // Support both old format (array) and new format (object)
       if(Array.isArray(imp)){
         members=imp;save();render();toast('✓ Members imported ('+imp.length+')');
       }else if(imp.members){
@@ -2348,9 +2159,6 @@ function exportCSV(){
   a.click();toast('✓ CSV exported');
 }
 
-// ══════════════════════════════════════════════
-//  MODAL DISMISS
-// ══════════════════════════════════════════════
 [['editModal',closeEdit],['renewModal',closeRenew],['waModal',closeWA],
  ['bulkModal',closeBulk],['detailModal',closeDetail],['settingsModal',closeSettings]
 ].forEach(([id,fn])=>{
@@ -2362,9 +2170,6 @@ function exportCSV(){
   if(el) el.addEventListener('keydown',e=>{if(e.key==='Enter') addMember();});
 });
 
-// ══════════════════════════════════════════════
-//  LANDING PAGE
-// ══════════════════════════════════════════════
 let isDemoMode = false;
 
 function launchApp(){
@@ -2451,14 +2256,12 @@ function loadDemoData(){
     {id:'e10',category:'Staff',desc:'Trainer Salary - Ramesh',amount:15000,date:monthsAgo(1).split('T')[0]},
   ];
 
-  // Generate attendance for last 7 days
   let activeIds = ['demo1','demo2','demo3','demo5','demo6','demo8'];
   for(let i=0;i<7;i++){
     let d=new Date(now); d.setDate(d.getDate()-i);
     let key=d.toISOString().split('T')[0];
     attendance[key]={};
     activeIds.forEach(id=>{
-      // ~70% attendance rate
       if(Math.random()>0.3) attendance[key][id]=true;
     });
   }
@@ -2470,19 +2273,13 @@ function loadDemoData(){
   renderExpenses();
 }
 
-// ══════════════════════════════════════════════
-//  BOOT
-// ══════════════════════════════════════════════
 init();
 
-// Show landing page only if no existing data
 (function(){
   let hasData = localStorage.getItem('fdMembers_v4');
   if(hasData && JSON.parse(hasData).length > 0){
-    // Returning user — skip landing
     launchApp();
   }
-  // else landing page stays visible
 })();
 </script>
 </body>
