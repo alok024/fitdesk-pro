@@ -1344,6 +1344,8 @@ tr:hover td{background:rgba(0,229,255,0.015);}
 <div class="toast" id="toast"></div>
 
 <script>
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
 const manifestData={
   name:'FitDesk Pro',short_name:'FitDesk',
   description:'Complete gym management suite',
@@ -1520,7 +1522,7 @@ function openRenew(i){
   renewIdx=i;
   let m=members[i],exp=new Date(m.expiry),today=new Date(),isExp=exp<today;
   document.getElementById('renewInfo').innerHTML=
-    `<b>${m.name}</b><br>Current expiry: <b>${exp.toLocaleDateString('en-GB')}</b><br>`+
+    `<b>${esc(m.name)}</b><br>Current expiry: <b>${exp.toLocaleDateString('en-GB')}</b><br>`+
     (isExp?`<span style="color:var(--red)">⚠ Expired ${Math.floor((today-exp)/(864e5))}d ago</span>`
           :`<span style="color:var(--orange)">Expiring in ${Math.ceil((exp-today)/(864e5))}d</span>`);
   document.getElementById('r-start').valueAsDate=isExp?today:exp;
@@ -1592,8 +1594,8 @@ function openDetail(i){
   let totalRenewals=(m.history||[]).filter(h=>h.action==='renew').length;
   let streak=calcStreak(m.id);
   document.getElementById('dtl-grid').innerHTML=`
-    <div class="detail-item"><div class="di-label">Phone</div><div class="di-value">📞 ${m.phone}</div></div>
-    <div class="detail-item"><div class="di-label">Email</div><div class="di-value">${m.email||'—'}</div></div>
+    <div class="detail-item"><div class="di-label">Phone</div><div class="di-value">📞 ${esc(m.phone)}</div></div>
+    <div class="detail-item"><div class="di-label">Email</div><div class="di-value">${esc(m.email||'—')}</div></div>
     <div class="detail-item"><div class="di-label">Gender</div><div class="di-value">${gMap[m.gender||'']}</div></div>
     <div class="detail-item"><div class="di-label">Date of Birth</div><div class="di-value">${db}</div></div>
     <div class="detail-item"><div class="di-label">Joined</div><div class="di-value">${jd}</div></div>
@@ -1601,7 +1603,7 @@ function openDetail(i){
     <div class="detail-item"><div class="di-label">Renewals</div><div class="di-value">${totalRenewals}×</div></div>
     <div class="detail-item"><div class="di-label">Total Paid</div><div class="di-value" style="color:var(--green)">₹${totalFee.toLocaleString('en-IN')}</div></div>
     <div class="detail-item"><div class="di-label">Attend Streak</div><div class="di-value" style="color:var(--orange)">🔥 ${streak} days</div></div>
-    ${m.note?`<div class="detail-item" style="grid-column:1/-1"><div class="di-label">Note</div><div class="di-value">${m.note}</div></div>`:''}
+    ${m.note?`<div class="detail-item" style="grid-column:1/-1"><div class="di-label">Note</div><div class="di-value">${esc(m.note)}</div></div>`:''}
   `;
   let hist=(m.history||[]).slice().reverse();
   document.getElementById('dtl-history').innerHTML=hist.length?hist.map((h,idx)=>{
@@ -1626,17 +1628,17 @@ function smartMsg(m){
   let gymName=settings.gymName||'the gym';
   if(!m.paid&&diff<0){
     let ago=Math.abs(diff);
-    return `Hi ${m.name} 👋,\n\nYour membership at ${gymName} expired ${ago}d ago (${expDate}) and payment is pending. 🙏\n\nPlease visit us to renew. We'd love to have you back! 💪\n\n— ${gymName}`;
+    return `Hi ${esc(m.name)} 👋,\n\nYour membership at ${gymName} expired ${ago}d ago (${expDate}) and payment is pending. 🙏\n\nPlease visit us to renew. We'd love to have you back! 💪\n\n— ${gymName}`;
   }else if(diff<0){
     let ago=Math.abs(diff);
-    return `Hi ${m.name} 👋,\n\nYour membership at ${gymName} expired ${ago}d ago (${expDate}). ⏳\n\nRenew to continue your fitness journey! 💪\n\n— ${gymName}`;
+    return `Hi ${esc(m.name)} 👋,\n\nYour membership at ${gymName} expired ${ago}d ago (${expDate}). ⏳\n\nRenew to continue your fitness journey! 💪\n\n— ${gymName}`;
   }else if(!m.paid){
-    return `Hi ${m.name} 👋,\n\nYour membership at ${gymName} is active until ${expDate}, but payment is pending. 💸\n\nKindly clear dues. Thank you! 🙏\n\n— ${gymName}`;
+    return `Hi ${esc(m.name)} 👋,\n\nYour membership at ${gymName} is active until ${expDate}, but payment is pending. 💸\n\nKindly clear dues. Thank you! 🙏\n\n— ${gymName}`;
   }else if(diff<=3){
     let dw=diff===0?'today':diff===1?'tomorrow':`in ${diff} days`;
-    return `Hi ${m.name} 👋,\n\nYour membership at ${gymName} expires ${dw} (${expDate}). ⏰\n\nRenew now to keep the momentum going! 💪\n\n— ${gymName}`;
+    return `Hi ${esc(m.name)} 👋,\n\nYour membership at ${gymName} expires ${dw} (${expDate}). ⏰\n\nRenew now to keep the momentum going! 💪\n\n— ${gymName}`;
   }else{
-    return `Hi ${m.name} 👋,\n\nYour membership at ${gymName} expires on ${expDate} (${diff} days left). ⏰\n\nRenew soon to avoid any break in training! 💪\n\n— ${gymName}`;
+    return `Hi ${esc(m.name)} 👋,\n\nYour membership at ${gymName} expires on ${expDate} (${diff} days left). ⏰\n\nRenew soon to avoid any break in training! 💪\n\n— ${gymName}`;
   }
 }
 function openWA(i){
@@ -1667,7 +1669,7 @@ function bulkRemind(){
             :!m.paid?`<span style="color:var(--orange)">Unpaid</span>`
             :`<span style="color:var(--orange)">${diff}d left</span>`;
     return `<div class="bulk-item">
-      <div class="bulk-left">${avHTML(m.name)}<span><b>${m.name}</b> — ${tag}</span></div>
+      <div class="bulk-left">${avHTML(m.name)}<span><b>${esc(m.name)}</b> — ${tag}</span></div>
       <button class="btn btn-sm btn-msg" onclick="openWA(${m._i});closeBulk()">WA 💬</button>
     </div>`;
   }).join('');
@@ -1727,7 +1729,7 @@ function renderAttendance(){
     let streak=calcStreak(m.id);
     html+=`<div class="attendee-row">
       ${avHTML(m.name)}
-      <span class="attend-name">${m.name}</span>
+      <span class="attend-name">${esc(m.name)}</span>
       ${streak>2?`<span class="attend-streak">🔥 ${streak}d</span>`:''}
       <div class="attend-toggle ${checked?'checked':''}" onclick="toggleAttend('${m.id}','${dateStr}',this)"></div>
     </div>`;
@@ -1812,8 +1814,8 @@ function renderExpenses(){
   let html=filtered.map(e=>`<div class="exp-row">
     <span class="exp-icon">${CAT_ICONS[e.category]||'📌'}</span>
     <div class="exp-info">
-      <div class="exp-title">${e.desc}</div>
-      <div class="exp-sub">${e.category} · ${new Date(e.date+'T00:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</div>
+      <div class="exp-title">${esc(e.desc)}</div>
+      <div class="exp-sub">${esc(e.category)} · ${new Date(e.date+'T00:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</div>
     </div>
     <span class="exp-amount">₹${e.amount.toLocaleString('en-IN')}</span>
     <button class="exp-del" onclick="deleteExpense('${e.id}')">✕</button>
@@ -2020,7 +2022,7 @@ function render(){
       let bdStr=new Date(m.dob+'T00:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'long'});
       return `<div class="birthday-item">
         ${avHTML(m.name)}
-        <div style="flex:1"><div style="font-size:13px;font-weight:500">${m.name}</div><div style="font-size:10px;color:var(--muted);font-family:var(--font-mono)">${bdStr}</div></div>
+        <div style="flex:1"><div style="font-size:13px;font-weight:500">${esc(m.name)}</div><div style="font-size:10px;color:var(--muted);font-family:var(--font-mono)">${bdStr}</div></div>
         <div style="font-size:11px;color:var(--pink);margin-right:8px;font-family:var(--font-mono)">${dstr}</div>
         <button class="btn btn-sm btn-msg" onclick="openWA(${m._memberIdx})">🎂 WA</button>
       </div>`;
@@ -2075,8 +2077,8 @@ function render(){
       table.innerHTML+=`<tr class="${(!m.paid&&overdue>5)?'highrisk':''}">
         <td><div class="member-cell">${avHTML(m.name)}
           <div class="member-info">
-            <div class="member-name">${m.name}</div>
-            <div class="member-phone">${m.phone} <a class="call-link" href="tel:${m.phone}">📞</a></div>
+            <div class="member-name">${esc(m.name)}</div>
+            <div class="member-phone">${esc(m.phone)} <a class="call-link" href="tel:${esc(m.phone)}">📞</a></div>
           </div></div></td>
         <td><span class="cat cat-${cat}">${cat==='Weight'?'Weight Loss':cat==='Muscle'?'Muscle':cat}</span></td>
         <td style="text-align:center"><span class="badge ${m.paid?'badge-paid':'badge-unpaid'}">${m.paid?'PAID':'UNPAID'}</span></td>
