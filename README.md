@@ -1,116 +1,163 @@
 # FitDesk Pro
 
-A complete gym management suite delivered as a single-file offline-capable PWA. No backend, no build process, no dependencies.
+A single HTML file for running the day-to-day admin of a small gym: members, membership
+renewals, attendance, expenses, and a finance summary. No backend, no build step, no
+dependencies — `index.html` is the entire application.
+
+## Run it
+
+Open `index.html` in a browser. That's it — there is no server to start and nothing to
+install first.
+
+```
+xdg-open index.html      # Linux
+open index.html          # macOS
+```
+
+or just double-click the file.
+
+## What it stores, and where
+
+Everything lives in the browser's `localStorage`, under these keys:
+
+- `fdMembers_v4` — member profiles, plans, and payment/renewal history
+- `fdExpenses` — expense records
+- `fdAttendance` — daily check-in records, keyed by date
+- `gymSettings` — gym name, owner contact, WhatsApp country code
+
+There is no server and nothing is ever sent off the device, except the two things below.
+
+Two things reach the network, both only when you trigger them directly:
+
+- The page's font (`fonts.googleapis.com`) loads once when you first open it online. If
+  you're offline, the page still works fine — it falls back to your system's default fonts.
+- "Send WhatsApp message" opens `wa.me` in a new tab, which needs internet to actually
+  deliver the message. Nothing about the app itself requires this.
+
+**A caveat if you open the file directly (`file://`) in a Chromium-based browser (Chrome,
+Edge):** storage is partitioned by folder, not by filename. If you copy `index.html` into
+the same folder to keep a second gym's data separate — e.g. `index-gym2.html` — it will
+read and write the *same* `localStorage` as the original, not a separate copy. Put each
+copy in its own folder if you need them isolated. (Verified in Chromium; not checked
+against Firefox or Safari's file:// storage rules.)
+
+Older versions of this app used `gymMembers_v2` / `gymMembers_v3` as the storage key.
+On first load, if no `fdMembers_v4` key exists yet, the app looks for either of those and
+migrates whatever it finds into the current format (each member gets an `id` and a
+synthetic join-history entry if it doesn't already have one). This path is covered by the
+test suite below.
+
+## What it deliberately does not do
+
+- No accounts, no login, no multi-user access — one browser, one dataset.
+- No server sync. Moving data between devices means exporting a JSON backup (Settings →
+  Data Management) and importing it on the other device.
+- No real "install to home screen" / offline-caching PWA behavior — see below.
+- No validation of imported backup files beyond "is this valid JSON." Restoring a backup
+  replaces your data wholesale; only import files you trust.
+- No CSV formula-injection guarding. A member name starting with `=`, `+`, `-`, or `@`
+  is written to the CSV as-is; if that CSV is later opened in Excel or Sheets, that cell
+  could be interpreted as a formula. Only relevant if you're importing member lists you
+  don't already trust.
+
+## The PWA / offline-install claim
+
+The page ships a web-app manifest and attempts to register a service worker, both built
+at runtime from `Blob` URLs rather than separate files. This does not currently work:
+
+```
+Failed to register a ServiceWorker: The URL protocol of the script
+('blob:...') is not supported.
+```
+
+Verified against Chromium — service workers cannot be registered from a `blob:` script
+URL at all, and separately, `file://` pages have no origin a service worker could run
+under in the first place. So in practice:
+
+- The install banner / "Add to Home Screen" prompt never fires, because Chrome requires a
+  working service worker before it considers a page installable.
+- There is no cache-first offline layer for repeat visits over a real URL.
+
+What genuinely does work offline: because the whole app — markup, styles, and logic — is
+one local file with no server calls of its own, opening it with no internet connection
+works normally (aside from the font, see above). That's a property of it being a single
+static file, not of the service worker, which is currently dead code.
+
+If you want this fixed properly, it needs an actual `sw.js` file served alongside
+`index.html` (not a same-file Blob trick) plus HTTPS or `localhost` hosting — `file://`
+can't host a service worker under any implementation.
+
+## Testing
+
+There are no UI or end-to-end tests. What's covered is the pure logic that's easy to get
+wrong silently: the HTML-escaping helper, the v2/v3 → v4 storage migration, the
+attendance-streak calculation, and CSV row/field escaping — plus two regression tests for
+real unescaped-`innerHTML` bugs found and fixed while writing this suite (member names
+reaching the dashboard's alert panel, and the search box reaching the "no results"
+message, both unescaped).
+
+The test file reads the real `function`/`const` definitions straight out of `index.html`
+at run time (by name, not copy-pasted) and executes them in isolation — so a test failure
+means the shipped code broke, not that a hand-copied duplicate drifted from it.
+
+```
+node test/index.test.js
+```
+
+No dependencies beyond Node itself (built-in `assert`, `fs`, `vm`-free plain evaluation).
+Tested on Node 22.
 
 ## Features
 
-- **Members Management** — Add, edit, track membership plans (30d–365d), fees, payment status, and member details
-- **Attendance Tracking** — Daily check-in records with streaks and per-member logs
-- **Finance Dashboard** — Revenue trends, monthly breakdown, plan analysis, 6-month charts
-- **Expense Tracking** — Categorized expenses (Rent, Electricity, Staff, Equipment, Marketing, Maintenance) with monthly filtering
-- **WhatsApp Integration** — Send bulk reminders, birthday greetings, and direct messages to members
-- **Alerts & Metrics** — Real-time action items for expiring memberships, overdue payments, upcoming birthdays
-- **CSV Export** — Full member data export for spreadsheet use
-- **Backup/Restore** — JSON-based full data backup with import support
-- **Offline PWA** — Install to home screen, works without internet, data stays on your device
-- **Dark Theme** — Cyan-accented UI optimized for mobile and desktop
+- **Members** — add/edit, plans from 30 to 365 days, fee and payment status, category,
+  notes
+- **Attendance** — per-day check-in toggle per member, with streak tracking
+- **Finance** — monthly revenue, plan-mix and category breakdowns, a 6-month bar chart
+- **Expenses** — categorized (Rent, Electricity, Staff, Equipment, Marketing,
+  Maintenance), filterable by month
+- **WhatsApp** — pre-filled reminder/birthday messages via `wa.me` deep links (bulk or
+  per-member)
+- **Dashboard alerts** — expiring memberships, unpaid dues, upcoming birthdays
+- **CSV export** — full member list, RFC4180-style quoting (see Testing above for what
+  that does and doesn't protect against)
+- **JSON backup/restore** — full-state export and import
 
-## Quick Start
+## Tabs
 
-1. **Open** `index.html` in any modern browser
-2. **Launch** the app or try demo mode with sample data
-3. **Configure** your gym name and WhatsApp country code in Settings
-4. **Add members** via the Members tab
-5. **Track attendance, payments, expenses** using dedicated tabs
+**Dashboard** — totals, a paid-member retention ring, the alert list above, a 6-month
+revenue chart, upcoming birthdays.
 
-No installation, no server, no signup required.
+**Members** — search, filter by status (all/paid/unpaid/expiring/expired) and category,
+sort by name/expiry/status/join date/fee, per-member actions (toggle paid, renew, edit,
+WhatsApp, view detail, delete).
 
-## Technology
+**Attendance** — pick a date, tap members present, see streaks.
 
-- Vanilla HTML, CSS, JavaScript (no frameworks)
-- LocalStorage for persistent data
-- Service Worker for offline caching
-- PWA manifest for installability
-- Responsive design with safe-area-inset support
+**Finance** — monthly revenue table + chart, plan-duration breakdown, category
+breakdown.
 
-## Tabs & Usage
-
-**Dashboard**
-- Overview stats: total members, active, expiring soon, unpaid
-- Retention ring showing paid member percentage
-- Action alerts for urgent items
-- 6-month revenue chart
-- Upcoming birthdays
-
-**Members**
-- Search and filter by status (all, paid, unpaid, expiring, expired)
-- Category filtering (General, Weight Loss, Muscle Building, Cardio, Yoga)
-- Sort by name, expiry, status, join date, or fee
-- Inline actions: toggle pay status, renew, edit, WhatsApp message, view details
-- Bulk delete from individual member delete button
-
-**Attendance**
-- Select date and toggle attendance per member
-- See attendance streaks
-- Filter by date range
-
-**Finance**
-- Monthly revenue table with bar chart
-- Membership plan breakdown (revenue by plan duration)
-- Member category breakdown (distribution %)
-- 6-month trending visualization
-
-**Expenses**
-- Add expenses by category and date
-- Monthly filter and breakdown
-- Delete individual expenses
-- Visual expense tracking
+**Expenses** — add/delete, filter by month.
 
 ## Settings
 
-- **Gym Profile**: Name and owner contact
-- **WhatsApp**: Country code selection for bulk messaging (+91 India, +1 USA, +44 UK, +971 UAE)
-- **Data Management**: 
-  - Backup to JSON file (auto-timestamped)
-  - Restore from JSON file
-  - Clear all data (irreversible)
+- Gym name and owner contact
+- WhatsApp country code (+91 / +1 / +44 / +971)
+- Backup to JSON, restore from JSON, clear all data (irreversible, asks for confirmation)
 
-## Data Storage
+## Demo mode
 
-All data is stored in browser localStorage:
-- `fdMembers_v4` — Member profiles, plans, payment history
-- `fdExpenses` — Expense records
-- `fdAttendance` — Daily check-in records (date-based)
-- `gymSettings` — Gym name, owner, WhatsApp config
+The landing page's "Try Demo" button loads 8 sample members with about 6 months of
+fabricated transaction and attendance history, so you can see the app populated before
+typing in real data. Clear it from Settings or the demo banner. It is clearly fake data,
+generated locally — it does not represent a real gym or real customers.
 
-Automatic migration from older versions (v2, v3) on first load.
+## Browser support
 
-## PWA Installation
-
-The app displays an install banner on first visit. Tap to add FitDesk Pro to your home screen. Works offline; all data remains local on your device.
-
-## Demo Mode
-
-Click "Try Demo" on the landing page to load 8 sample members with 6 months of transaction and attendance history. Clear via Settings or the demo banner.
-
-## Browser Support
-
-Works on any modern browser with localStorage and Service Worker support:
-- Chrome/Edge 50+
-- Firefox 45+
-- Safari 11+
-- Mobile browsers (iOS Safari 11+, Chrome, Firefox, Samsung Internet)
-
-## Offline Behavior
-
-The app caches itself on first load. You can use it completely offline:
-- Add/edit/delete members
-- Record attendance
-- Track expenses
-- Generate reports
-
-Sync between devices by exporting JSON, transferring via email, and importing on another device.
+The one thing in the code that sets a real floor is the `??` (nullish coalescing)
+operator, which needs a 2020-or-later browser: Chrome/Edge 80+, Firefox 72+, Safari
+13.1+. Older browsers will fail to parse the script at all rather than degrading
+gracefully.
 
 ## License
 
-No license file present. All rights reserved by the author.
+MIT — see [LICENSE](LICENSE).

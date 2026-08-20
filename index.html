@@ -1585,7 +1585,7 @@ function openDetail(i){
   let diff=Math.ceil((exp-today)/864e5);
   let cat=m.category||'General';
   document.getElementById('dtl-meta').innerHTML=
-    `<span class="cat cat-${cat}">${cat}</span>`+
+    `<span class="cat cat-${esc(cat)}">${esc(cat)}</span>`+
     (m.paid?'<span style="color:var(--green);font-size:12px">✓ Paid</span>':'<span style="color:var(--red);font-size:12px">✗ Unpaid</span>');
   let gMap={'M':'♂ Male','F':'♀ Female','O':'Other','':'—'};
   let jd=m.joinDate?new Date(m.joinDate).toLocaleDateString('en-GB'):'—';
@@ -2007,7 +2007,7 @@ function render(){
     alertEl.innerHTML=alerts.slice(0,8).map(a=>{
       let cls=a.type==='exp'?'ab-exp':a.type==='pay'?'ab-pay':'ab-bd';
       let prefix=a.type==='exp'?'⏰':a.type==='pay'?'💸':'🎂';
-      return `<div class="alert-row"><span class="alert-badge ${cls}">${prefix}</span><span>${a.text}</span></div>`;
+      return `<div class="alert-row"><span class="alert-badge ${cls}">${prefix}</span><span>${esc(a.text)}</span></div>`;
     }).join('');
   }else{
     alertEl.className='';alertEl.innerHTML='<span style="color:var(--green);font-family:var(--font-mono);font-size:12px">✓ All clear — no urgent actions</span>';
@@ -2060,7 +2060,7 @@ function render(){
   </tr>`;
   if(!filtered.length){
     table.innerHTML+=`<tr class="empty-row"><td colspan="6">${search
-      ? `<div class="empty-state"><span class="empty-state-icon">🔍</span><div class="empty-state-title">No Results</div><div class="empty-state-sub">No members match "${search}"<br>Try a different name or phone number</div></div>`
+      ? `<div class="empty-state"><span class="empty-state-icon">🔍</span><div class="empty-state-title">No Results</div><div class="empty-state-sub">No members match "${esc(search)}"<br>Try a different name or phone number</div></div>`
       : `<div class="empty-state"><span class="empty-state-icon">👥</span><div class="empty-state-title">No Members Yet</div><div class="empty-state-sub">Add your first member above to get started.<br>You can also try Demo Mode from the home screen.</div><button class="btn btn-primary" style="max-width:200px;margin:0 auto;" onclick="showTab('members');openAddForm()">+ Add First Member</button></div>`
     }</td></tr>`;
   }else{
@@ -2080,7 +2080,7 @@ function render(){
             <div class="member-name">${esc(m.name)}</div>
             <div class="member-phone">${esc(m.phone)} <a class="call-link" href="tel:${esc(m.phone)}">📞</a></div>
           </div></div></td>
-        <td><span class="cat cat-${cat}">${cat==='Weight'?'Weight Loss':cat==='Muscle'?'Muscle':cat}</span></td>
+        <td><span class="cat cat-${esc(cat)}">${esc(cat==='Weight'?'Weight Loss':cat==='Muscle'?'Muscle':cat)}</span></td>
         <td style="text-align:center"><span class="badge ${m.paid?'badge-paid':'badge-unpaid'}">${m.paid?'PAID':'UNPAID'}</span></td>
         <td><span class="${expClass}">${exp.toLocaleDateString('en-GB')}</span>${daysStr?`<div class="days-left">${daysStr}</div>`:''}</td>
         <td style="color:var(--green);font-family:var(--font-mono);font-size:13px;font-weight:600">${m.fee?'₹'+m.fee.toLocaleString('en-IN'):'—'}</td>
